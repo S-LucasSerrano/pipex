@@ -40,7 +40,9 @@ static char	*get_cmd_file(char *cmd, char **paths)
 		free (str);
 		paths++;
 	}
-	return (null_error("Error: invalid command\n"));
+	error ("Error: invalid command -> ");
+	error (cmd);
+	return (null_error("\n"));
 }
 
 /* Creates -with malloc- a 2D chart table containing all paths in <envp> */
