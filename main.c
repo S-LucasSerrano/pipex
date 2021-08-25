@@ -11,10 +11,10 @@ t_bool	valid_files(int argc, char **argv)
 	else
 	{
 		if (access(argv[1], R_OK) == -1)
-			valid = error("Error: Could't read from <infile> \n");
+			valid = error("Error: Could't read from the <infile> \n");
 	}
 	if (!valid)
-		write(0, "usage: ./pipex infile \"cmd1\" \"cmd2\" outfile \n", 45);
+		ft_putstr_fd("usage: ./pipex infile \"cmd1\" \"cmd2\" outfile \n", 0);
 	return (valid);
 }
 
@@ -29,6 +29,12 @@ t_bool	init_data(t_pipex *data, int argc, char **argv, char **envp)
 		return (FALSE);
 	data->in_fd = open(argv[1], O_RDONLY);
 	data->out_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (data->out_fd == -1)
+	{
+		error ("Error: Could't write on the <outfile> \n");
+		ft_putstr_fd("usage: ./pipex infile \"cmd1\" \"cmd2\" outfile \n", 0);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
