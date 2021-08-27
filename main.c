@@ -8,11 +8,8 @@ t_bool	valid_files(int argc, char **argv)
 	valid = TRUE;
 	if (argc < 5)
 		valid = error("Error: Too few parameters \n");
-	else
-	{
-		if (access(argv[1], R_OK) == -1)
-			valid = error("Error: Could't read from the <infile> \n");
-	}
+	else if (access(argv[1], R_OK) == -1)
+		valid = error("Error: Could't read from the<infile> \n");
 	if (!valid)
 		ft_putstr_fd("usage: ./pipex infile \"cmd1\" \"cmd2\" outfile \n", 0);
 	return (valid);
